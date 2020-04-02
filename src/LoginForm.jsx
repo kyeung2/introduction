@@ -1,4 +1,3 @@
-import * as AWS from 'aws-sdk/global';
 import React from "react";
 import {CognitoUser, CognitoUserPool, AuthenticationDetails} from 'amazon-cognito-identity-js';
 
