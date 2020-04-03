@@ -1,22 +1,15 @@
 import React from "react";
-import {CognitoUser, CognitoUserPool, AuthenticationDetails} from 'amazon-cognito-identity-js';
+import { AuthenticationDetails} from 'amazon-cognito-identity-js';
+import {  getCognitoUser} from "./UserUtils";
 
 export default class LoginForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.login = this.login.bind(this);
-    }
-
 
     login(event) {
         event.preventDefault();
         const data = new FormData(event.target);
         const username = data.get("username");
         const password = data.get("password");
-
         console.log(`username:${username}, password:${password}`);
-
-
 
         var authenticationData = {
             Username: username,
@@ -27,20 +20,7 @@ export default class LoginForm extends React.Component {
             authenticationData
         );
 
-        const poolData = {
-            UserPoolId: 'eu-west-1_46TmDKNHD',
-            ClientId: '5ign0nv6b1tqnjlc7cc72nhog5',
-        };
-        const userPool = new CognitoUserPool(poolData);
-
-        const userData = {
-            Username: username,
-            Pool: userPool,
-        };
-        const cognitoUser = new CognitoUser(userData);
-
-
-        cognitoUser.authenticateUser(authenticationDetails, {
+        getCognitoUser(username).authenticateUser(authenticationDetails, {
             onSuccess: function(result) {
                 var accessToken = result.getAccessToken().getJwtToken();
 
