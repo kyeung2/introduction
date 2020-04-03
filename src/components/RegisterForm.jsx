@@ -1,10 +1,10 @@
 import React from "react";
 import {CognitoUserAttribute} from 'amazon-cognito-identity-js';
-import { userPool} from "./UserUtils";
+import {userPool} from "./UserUtils";
 
-export default class RegisterForm extends React.Component {
+function RegisterForm() {
 
-    registerUser(event) {
+    const registerUser = event => {
         event.preventDefault();
         const data = new FormData(event.target);
         const email = data.get("email");
@@ -32,18 +32,18 @@ export default class RegisterForm extends React.Component {
                     return;
                 }
                 var cognitoUser = result.user;
-                console.log(`user registered: ${ cognitoUser.getUsername()}, please check your email for verification code.`);
+                console.log(`user registered: ${cognitoUser.getUsername()}, please check your email for verification code.`);
             });
-    }
+    };
 
-    render() {
-        return (
-            <form onSubmit={this.registerUser}>
-                <input type="email" placeholder="email" name="email"/>
-                <input type="text" placeholder="username" name="username"/>
-                <input type="password" placeholder="password" name="password"/>
-                <button>Register User</button>
-            </form>
-        );
-    }
+    return (
+        <form onSubmit={registerUser}>
+            <input type="email" placeholder="email" name="email"/>
+            <input type="text" placeholder="username" name="username"/>
+            <input type="password" placeholder="password" name="password"/>
+            <button>Register User</button>
+        </form>
+    );
 }
+
+export default RegisterForm

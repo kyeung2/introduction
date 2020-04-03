@@ -24,16 +24,6 @@ function App() {
                 console.log(session);
                 document.title = `Flying Nimbus, user: ${cognitoUser.getUsername()}`;
 
-                // // NOTE: getSession must be called to authenticate user before calling getUserAttributes
-                // cognitoUser.getUserAttributes(function (err, attributes) {
-                //     if (err) {
-                //         // Handle error
-                //     } else {
-                //         // Do something with attributes
-                //     }
-                // });
-
-
                 AWS.config.credentials = new AWS.CognitoIdentityCredentials(
                     {
                         IdentityPoolId: 'eu-west-1:1dd2d7b7-2a94-4f89-9763-4bbe4f784231', // your identity pool id here

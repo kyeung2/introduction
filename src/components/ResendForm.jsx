@@ -1,9 +1,9 @@
 import React from "react";
 import {getCognitoUser} from './UserUtils';
 
-export default class ResendForm extends React.Component {
+function ResendForm() {
 
-    resendCode(event) {
+    const resendCode = event => {
         event.preventDefault();
         const data = new FormData(event.target);
         const username = data.get("username");
@@ -15,15 +15,14 @@ export default class ResendForm extends React.Component {
             }
             console.log(`Code resent: ${result}`);
         });
-    }
+    };
 
-    render() {
-        return (
-            <form onSubmit={this.resendCode}>
-                <input type="username" placeholder="username" name="username"/>
-                <button>Resend Code</button>
-            </form>
-
-        );
-    }
+    return (
+        <form onSubmit={resendCode}>
+            <input type="username" placeholder="username" name="username"/>
+            <button>Resend Code</button>
+        </form>
+    );
 }
+
+export default ResendForm
