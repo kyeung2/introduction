@@ -1,12 +1,8 @@
 import React from "react";
-import {CognitoUserAttribute, CognitoUserPool} from 'amazon-cognito-identity-js';
+import {CognitoUserAttribute} from 'amazon-cognito-identity-js';
+import { userPool} from "./UserUtils";
 
 export default class RegisterForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.registerUser = this.registerUser.bind(this);
-    }
-
 
     registerUser(event) {
         event.preventDefault();
@@ -15,14 +11,6 @@ export default class RegisterForm extends React.Component {
         const username = data.get("username");
         const password = data.get("password");
         console.log(`email:${email}, username:${username}, password:${password}`);
-
-
-        const poolData = {
-            UserPoolId: 'eu-west-1_46TmDKNHD',
-            ClientId: '5ign0nv6b1tqnjlc7cc72nhog5',
-        };
-
-        const userPool = new CognitoUserPool(poolData);
 
         const emailDate = {
             Name: "email",
